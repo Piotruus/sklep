@@ -1,0 +1,106 @@
+# =====================================================================
+#  SKLEP ZA CZAS  (/sklepzaczas)
+#  Czas gry jest liczony przez plugin (sekunda online = 1s do wydania).
+#  Po zmianach: /sklepadmin reload
+# =====================================================================
+title: "&7Sklep za czas"
+rows: 5
+
+# %time% = czas gracza do wydania
+static-items:
+  info:
+    slot: 4
+    material: CLOCK
+    name: "&7Przegrany czas do wydania &f%time%"
+    action: refresh
+  powrot:
+    slot: 40
+    material: BARRIER
+    name: "&cPowrót"
+    command: sklep
+
+success:
+  message: "&aPomyslnie zakupiono!"
+  subtitle: ""
+  sound: ""
+fail:
+  message: "&cNie masz wystarczajaco spedzonego czasu!"
+  subtitle: ""
+  sound: ""
+  reopen: true                # po bledzie GUI odswieza sie
+
+# ---------------------------------------------------------------------
+#  PRZEDMIOTY
+#  cost: czas, np. 4h  2d  1d12h30m  90m  (d=dni h=godziny m=minuty s=sekundy)
+#  Wyglad: slot, material, name, lore, enchants, flags, glow ...
+#  Placeholdery w lore: %cost% (koszt)  %time% (czas gracza)
+#  Nagroda:
+#    rewards:   przedmioty dla gracza
+#    commands:  komendy konsoli (%player% = nick) - klucze, rangi itd.
+# ---------------------------------------------------------------------
+items:
+  shulker:
+    slot: 20
+    cost: 4h
+    material: PURPLE_SHULKER_BOX
+    name: "&eShulkerbox"
+    lore:
+      - "&8» &7Koszt przedmiotu: &f%cost%"
+      - "&8» &7do wydania: &f%time%"
+      - ""
+      - "&8» &aKliknij &2LEWYM&a, aby zakupic!"
+    rewards:
+      shulker:
+        material: PURPLE_SHULKER_BOX
+
+  rzadki_klucz:
+    slot: 21
+    cost: 2d
+    material: TRIPWIRE_HOOK
+    name: "&aRzadki klucz"
+    lore:
+      - "&8» &7Koszt przedmiotu: &f%cost%"
+      - "&8» &7do wydania: &f%time%"
+      - ""
+      - "&8» &aKliknij &2LEWYM&a, aby zakupic!"
+    commands:
+      - "case key give %player% rzadka 1"
+
+  klucz_pety:
+    slot: 22
+    cost: 6d
+    material: TRIPWIRE_HOOK
+    name: "&6Klucz do skrzynki z petami"
+    lore:
+      - "&8» &7Koszt przedmiotu: &f%cost%"
+      - "&8» &7do wydania: &f%time%"
+      - ""
+      - "&8» &aKliknij &2LEWYM&a, aby zakupic!"
+    commands:
+      - "case key give %player% pety 1"
+
+  vip:
+    slot: 23
+    cost: 7d
+    material: BOOK
+    name: "&eRanga VIP na 30 dni"
+    lore:
+      - "&8» &7Koszt przedmiotu: &f%cost%"
+      - "&8» &7do wydania: &f%time%"
+      - ""
+      - "&8» &aKliknij &2LEWYM&a, aby zakupic!"
+    commands:
+      - "lp user %player% parent set vip"
+
+  epicki_klucz:
+    slot: 24
+    cost: 4d
+    material: TRIPWIRE_HOOK
+    name: "&5Epicki klucz"
+    lore:
+      - "&8» &7Koszt przedmiotu: &f%cost%"
+      - "&8» &7do wydania: &f%time%"
+      - ""
+      - "&8» &aKliknij &2LEWYM&a, aby zakupic!"
+    commands:
+      - "case key give %player% epicka 1"

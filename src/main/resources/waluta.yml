@@ -1,0 +1,253 @@
+# =====================================================================
+#  SKLEP ZA WIRTUALNA WALUTE  (/sklepzawalute)  - wymaga Vault + plugin ekonomii
+#  Po zmianach: /sklepadmin reload
+# =====================================================================
+
+# --- Ekran startowy: Kupno / Sprzedaz ---------------------------------
+hub:
+  title: "&7Sklep"
+  rows: 5
+  static-items:
+    kupno:
+      slot: 21
+      material: LIME_CONCRETE
+      name: "&aKupno przedmiotow"
+      action: buy
+    sprzedaz:
+      slot: 23
+      material: RED_CONCRETE
+      name: "&cSprzedaz przedmiotow"
+      action: sell
+    powrot:
+      slot: 40
+      material: BARRIER
+      name: "&cPowrot"
+      command: sklep
+
+# --- KUPNO -------------------------------------------------------------
+# Wpis: slot, material, price (cena za 1 szt.), name (opcjonalnie),
+#       stored-enchants / enchants (opcjonalnie - dotyczy tez wydawanego przedmiotu)
+# Dodanie nowego przedmiotu = nowy blok z unikalna nazwa i wolnym slotem.
+# Placeholdery: %price% %amount% %total% %item% %n%
+buy:
+  title: "&7Sklep-Kupno"
+  rows: 6
+  max-amount: 64
+  list-lore:
+    - "&8>> &7Koszt Produktu: &f%price%$"
+    - ""
+    - "&aKliknij &2LEWYM&a, aby zakupic!"
+  static-items:
+    powrot:
+      slot: 49
+      material: BARRIER
+      name: "&cPowrot"
+      action: hub
+
+  # Ekran wyboru ilosci
+  amount-menu:
+    title: "&7Sklep-Kupno | %item%"
+    rows: 5
+    slots:
+      item: 19
+    item-lore:
+      - "&8>> &7Cena kupna: &f%price%$"
+    static-items:
+      powrot:
+        slot: 40
+        material: BARRIER
+        name: "&cPowrot"
+        action: buylist
+    confirm:
+      slot: 31
+      material: LIME_DYE
+      name: "&aZatwierdz Zakup"
+      lore:
+        - "&7Kliknij aby zatwierdzic ten zakup."
+        - "&8>> &7Ilosc: &f%amount%"
+        - "&8>> &7Razem: &f%total%$"
+    add-button:
+      material: LIME_STAINED_GLASS_PANE
+      name: "&aDodaj %n% szt."
+      lore:
+        - "&8>> &7Kliknij, aby dodac %n% szt."
+    remove-button:
+      material: RED_STAINED_GLASS_PANE
+      name: "&cUsun %n% szt."
+      lore:
+        - "&7Kliknij, aby usunac %n% szt."
+    add-slots:        # ilosc: slot
+      1: 32
+      10: 23
+      64: 14
+    remove-slots:
+      1: 30
+      10: 21
+      64: 12
+
+  items:
+    cow_spawn_egg:
+      slot: 10
+      material: COW_SPAWN_EGG
+      name: "&eJajo Krowy"
+      price: 200
+    lapis_lazuli:
+      slot: 11
+      material: LAPIS_LAZULI
+      name: "&eLapis Lazuli"
+      price: 0.62
+    sugar_cane:
+      slot: 12
+      material: SUGAR_CANE
+      name: "&eTrzcina cukrowa"
+      price: 15
+    bookshelf:
+      slot: 13
+      material: BOOKSHELF
+      name: "&ePolka z ksiazkami"
+      price: 30
+    ender_chest:
+      slot: 14
+      material: ENDER_CHEST
+      name: "&eEnder Chest"
+      price: 150
+    villager_spawn_egg:
+      slot: 15
+      material: VILLAGER_SPAWN_EGG
+      name: "&eJajo Osadnika"
+      price: 500
+    enchanting_table:
+      slot: 16
+      material: ENCHANTING_TABLE
+      name: "&eStol do enchantowania"
+      price: 150
+    oak_log:
+      slot: 20
+      material: OAK_LOG
+      name: "&eDrewno"
+      price: 5
+    apple:
+      slot: 21
+      material: APPLE
+      name: "&eJablko"
+      price: 15
+    chorus_fruit:
+      slot: 22
+      material: CHORUS_FRUIT
+      name: "&eOwoc Horusa"
+      price: 10000
+    emerald:
+      slot: 23
+      material: EMERALD
+      name: "&eEmerald"
+      price: 15
+    gunpowder:
+      slot: 24
+      material: GUNPOWDER
+      name: "&eProch"
+      price: 468.75
+    name_tag:
+      slot: 30
+      material: NAME_TAG
+      name: "&eName Tag"
+      price: 50
+    enchanted_book:
+      slot: 31
+      material: ENCHANTED_BOOK
+      name: "&eEnchantowana Ksiazka"
+      price: 500
+      stored-enchants: {vanishing_curse: 1}
+    cobweb:
+      slot: 32
+      material: COBWEB
+      name: "&ePajeczyna"
+      price: 50
+
+# --- SPRZEDAZ ----------------------------------------------------------
+# PPM = sprzedaj 1 szt., SHIFT+PPM = sprzedaj wszystko.
+# only-plain-items: true = sprzedawane sa tylko "zwykle" przedmioty (bez nazwy,
+# zaklec, lore) - chroni przed sprzedaza cennych, specjalnych przedmiotow.
+sell:
+  title: "&7Sklep-Sprzedaz"
+  rows: 6
+  only-plain-items: true
+  list-lore:
+    - "&8>> &7Cena Sprzedazy: &f%price%$"
+    - ""
+    - "&8>> &cKliknij PRAWYM, aby sprzedac!"
+    - "&8>> &eKliknij SHIFT + PRAWY, aby sprzedac Wszystko!"
+  static-items:
+    powrot:
+      slot: 49
+      material: BARRIER
+      name: "&cPowrot"
+      action: hub
+  items:
+    cobblestone:
+      slot: 10
+      material: COBBLESTONE
+      price: 0.02
+    coal:
+      slot: 11
+      material: COAL
+      price: 0.08
+    raw_copper:
+      slot: 12
+      material: RAW_COPPER
+      price: 0.4
+    raw_iron:
+      slot: 13
+      material: RAW_IRON
+      price: 0.8
+    diamond:
+      slot: 14
+      material: DIAMOND
+      price: 6
+    redstone:
+      slot: 15
+      material: REDSTONE
+      price: 0.62
+    bone:
+      slot: 16
+      material: BONE
+      price: 0.4
+    bamboo:
+      slot: 19
+      material: BAMBOO
+      price: 0.1
+    rotten_flesh:
+      slot: 20
+      material: ROTTEN_FLESH
+      price: 0.4
+    spider_eye:
+      slot: 21
+      material: SPIDER_EYE
+      price: 0.4
+    string:
+      slot: 22
+      material: STRING
+      price: 0.4
+    wheat:
+      slot: 23
+      material: WHEAT
+      price: 0.6
+    sugar_cane:
+      slot: 24
+      material: SUGAR_CANE
+      price: 0.6
+    lapis_lazuli:
+      slot: 25
+      material: LAPIS_LAZULI
+      price: 0.4
+    cobbled_deepslate:
+      slot: 30
+      material: COBBLED_DEEPSLATE
+      price: 0.02
+    quartz:
+      slot: 31
+      material: QUARTZ
+      price: 0.5
+    glowstone_dust:
+      slot: 32
+      material: GLOWSTONE_DUST
+      price: 1

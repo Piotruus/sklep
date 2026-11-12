@@ -1,0 +1,32 @@
+name: SklepGUI
+main: pl.sklepgui.SklepPlugin
+version: 1.0.0
+api-version: '1.21'
+author: SklepGUI
+description: Glowne menu /sklep + sklep za serca, walute, czas i rynek graczy
+softdepend: [Vault]
+
+commands:
+  sklep:
+    description: Glowne menu sklepu
+    permission: sklep.use
+  sklepzaserca:
+    description: Sklep za serca
+    permission: sklep.use
+  sklepzawalute:
+    description: Sklep za wirtualna walute
+    permission: sklep.use
+  sklepzaczas:
+    description: Sklep za przegrany czas
+    permission: sklep.use
+  sklepadmin:
+    description: Komendy administracyjne SklepGUI
+    permission: sklep.admin
+
+permissions:
+  sklep.use:
+    description: Uzywanie sklepow
+    default: true
+  sklep.admin:
+    description: Administracja SklepGUI
+    default: op

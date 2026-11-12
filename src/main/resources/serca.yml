@@ -1,0 +1,214 @@
+# =====================================================================
+#  SKLEP ZA SERCA  (/sklepzaserca)
+#  Po zmianach: /sklepadmin reload
+# =====================================================================
+title: "&8Sklep za serca"
+rows: 5
+
+# Jak plugin rozpoznaje "serce" (walute tego sklepu). Musi pasowac do przedmiotu,
+# ktory gracze dostaja np. z /wyplacserce. Sprawdzane: material, custom-model-data, nazwa (bez kolorow).
+# Ten sam wpis jest tez uzywany przez /sklepadmin dajserce.
+currency-item:
+  material: RED_DYE
+  name: "&4&lDodatkowe serce"
+  custom-model-data: 1
+  lore:
+    - " &8» &7Kliknij PRAWYM, aby je wykorzystać!"
+
+# Przyciski stale (slot + dowolne pola przedmiotu + command/action)
+static-items:
+  info:
+    slot: 4
+    material: BOOK
+    name: "&eJak zdobyć serca?"
+    lore:
+      - " &8» &7Aby &azdobyć &7serca do kupna"
+      - " &8» &fprzedmiotów &7poniżej musisz wykonać"
+      - " &8» &7komendę &f/wyplacserce &7i zebrać"
+      - " &8» &7odpowiednią ilość do zakupu."
+  powrot:
+    slot: 40
+    material: BARRIER
+    name: "&cPowrót!"
+    command: sklep            # wraca do glownego GUI
+
+# Komunikaty po zakupie / braku serc
+success:
+  message: ""
+  subtitle: "&aPomyslnie zakupiono!"
+  sound: "entity.villager.celebrate"
+fail:
+  message: ""
+  subtitle: "&7Nie posiadasz wystarczajaco serc! &f/wyplacserce"
+  sound: "entity.villager.no"
+  reopen: false               # true = po bledzie GUI zostaje otwarte
+
+# ---------------------------------------------------------------------
+#  PRZEDMIOTY W SKLEPIE
+#  Wyglad (to co widac w GUI): slot, material, name, lore, enchants, flags, glow, custom-model-data
+#  cost: ilosc serc
+#  Nagroda - mozesz laczyc:
+#    rewards:       przedmioty do wydania (kazdy z polami jak wyzej + amount)
+#    rewards-mode:  all (domyslnie - wszystkie) | random (jeden losowy z listy)
+#    pool:          nazwa puli z /sklepadmin pool add <nazwa> (losowy przedmiot z puli)
+#    commands:      komendy konsoli, %player% = nick
+#  Placeholdery w lore: %cost%
+#  Zaklecia: nazwy Minecrafta, np. sharpness, fire_aspect, efficiency, unbreaking,
+#  protection, vanishing_curse (poziom dowolny - bez limitu).
+# ---------------------------------------------------------------------
+items:
+  kilof:
+    slot: 19
+    cost: 40
+    material: NETHERITE_PICKAXE
+    name: "&4Anarchiczny kilof 10/5/5"
+    enchants: {efficiency: 10, fortune: 5, unbreaking: 5}
+    lore:
+      - " &8» &7Koszt: &f%cost% serc"
+      - ""
+      - " &8» &aKliknij &2LEWYM&a, aby zakupić!"
+    rewards:
+      kilof:
+        material: NETHERITE_PICKAXE
+        name: "&4Anarchiczny kilof"
+        enchants: {efficiency: 10, fortune: 5, unbreaking: 5}
+
+  set:
+    slot: 20
+    cost: 30
+    material: NETHERITE_BLOCK
+    name: "&4Losowa część anarchicznego seta 5/5"
+    enchants: {unbreaking: 10}
+    flags: [HIDE_ENCHANTS]
+    lore:
+      - ""
+      - " &ePrzedmioty do wylosowania:"
+      - "  &7Anarchiczny hełm &e(Ochrona 5, Niezniszczalność 5)"
+      - "  &7Anarchiczna klata &e(Ochrona 5, Niezniszczalność 5)"
+      - "  &7Anarchiczne spodnie &e(Ochrona 5, Niezniszczalność 5)"
+      - "  &7Anarchiczne buty &e(Ochrona 5, Niezniszczalność 5)"
+      - ""
+      - " &8» &7Koszt: &f%cost% serc"
+      - ""
+      - " &8» &aKliknij &2LEWYM&a, aby zakupić!"
+    rewards-mode: random
+    rewards:
+      helm:
+        material: NETHERITE_HELMET
+        name: "&4Anarchiczny hełm"
+        enchants: {protection: 5, unbreaking: 5}
+      klata:
+        material: NETHERITE_CHESTPLATE
+        name: "&4Anarchiczna klata"
+        enchants: {protection: 5, unbreaking: 5}
+      spodnie:
+        material: NETHERITE_LEGGINGS
+        name: "&4Anarchiczne spodnie"
+        enchants: {protection: 5, unbreaking: 5}
+      buty:
+        material: NETHERITE_BOOTS
+        name: "&4Anarchiczne buty"
+        enchants: {protection: 5, unbreaking: 5}
+
+  ksiegi:
+    slot: 21
+    cost: 50
+    material: ENCHANTED_BOOK
+    name: "&9Losowa magiczna księga z potężnym zaklęciem"
+    custom-model-data: 2
+    lore:
+      - ""
+      - " &ePrzedmioty do wylosowania:"
+      - "  &7Księga &bobrażeń krytycznych"
+      - "  &7Księga &2trucizny"
+      - "  &7Księga &bszybkości"
+      - "  &7Księga &cregeneracji"
+      - "  &7Księga &eodporności"
+      - "  &7Księga &6pośpiechu"
+      - "  &7Księga &3uniku"
+      - ""
+      - " &8» &7Koszt: &f%cost% serc"
+      - ""
+      - " &8» &aKliknij &2LEWYM&a, aby zakupić!"
+    # Pula ksiag uzupelniasz komenda: trzymaj ksiege w rece i wpisz /sklepadmin pool add ksiegi
+    pool: ksiegi
+
+  anarchiczne_serce:
+    slot: 22
+    cost: 30
+    material: RED_DYE
+    name: "&4&lAnarchiczne serce"
+    custom-model-data: 4
+    lore:
+      - " &8» &7To &cserce &7możesz użyć poza limitem &c30 serc&7."
+      - " &8» &7Maksymalnie możesz uzyskać &f40 serduszek&7!"
+      - ""
+      - " &8» &7Koszt: &f%cost% serc"
+      - ""
+      - " &8» &aKliknij &2LEWYM&a, aby zakupić!"
+    rewards:
+      serce:
+        material: RED_DYE
+        name: "&4&lAnarchiczne serce"
+        custom-model-data: 4
+        lore:
+          - " &8» &7To &cserce &7możesz użyć poza limitem &c30 serc&7."
+          - " &8» &7Maksymalnie możesz uzyskać &f40 serduszek&7!"
+
+  luk:
+    slot: 23
+    cost: 20
+    material: BOW
+    name: "&4Anarchiczny łuk"
+    enchants: {flame: 1, power: 6, punch: 3, unbreaking: 5}
+    lore:
+      - " &8» &7Koszt: &f%cost% serc"
+      - ""
+      - " &8» &aKliknij &2LEWYM&a, aby zakupić!"
+    rewards:
+      luk:
+        material: BOW
+        name: "&4Anarchiczny łuk"
+        enchants: {flame: 1, power: 6, punch: 3, unbreaking: 5}
+
+  miecz:
+    slot: 24
+    cost: 30
+    material: NETHERITE_SWORD
+    name: "&4Anarchiczny miecz"
+    enchants: {fire_aspect: 2, sharpness: 6}
+    lore:
+      - " &8» &7Koszt: &f%cost% serc"
+      - ""
+      - " &8» &aKliknij &2LEWYM&a, aby zakupić!"
+    rewards:
+      miecz:
+        material: NETHERITE_SWORD
+        name: "&4Anarchiczny miecz"
+        enchants: {fire_aspect: 2, sharpness: 6}
+
+  trojzab:
+    slot: 25
+    cost: 50
+    material: TRIDENT
+    name: "&4Anarchiczny trójząb"
+    enchants: {channeling: 1, impaling: 6, loyalty: 4, riptide: 4, unbreaking: 4}
+    lore:
+      - "&fCzas przeładowania 10s"
+      - ""
+      - "&7Ten &ctrójząb &7posiada szybsze"
+      - "&7przeładowanie niż klasyczny!"
+      - ""
+      - " &8» &7Koszt: &f%cost% serc"
+      - ""
+      - " &8» &aKliknij &2LEWYM&a, aby zakupić!"
+    rewards:
+      trojzab:
+        material: TRIDENT
+        name: "&4Anarchiczny trójząb"
+        enchants: {channeling: 1, impaling: 6, loyalty: 4, riptide: 4, unbreaking: 4}
+        lore:
+          - "&fCzas przeładowania 10s"
+          - ""
+          - "&7Ten &ctrójząb &7posiada szybsze"
+          - "&7przeładowanie niż klasyczny!"

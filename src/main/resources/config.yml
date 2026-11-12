@@ -1,0 +1,77 @@
+# =====================================================================
+#  SklepGUI - config glowny (menu /sklep + wiadomosci)
+#  Kolory: &a &c &e itd.   Po zmianach: /sklepadmin reload
+# =====================================================================
+
+prefix: ""
+
+time:
+  # true = nowy gracz (bez zapisanego czasu) zaczyna z tyloma sekundami, ile ma
+  # wyciagniete na serwerze wg statystyk Minecrafta. false = start od 0 (jak w Skripcie).
+  seed-from-playtime: false
+
+# ---------------------------------------------------------------------
+#  GLOWNE MENU /sklep
+#  slot: 0-44 (5 rzedow). Dla kazdego przedmiotu mozesz uzyc:
+#   material, name, lore, amount, enchants, flags, glow, custom-model-data, skull-owner
+#   command: komenda wykonywana PRZEZ GRACZA po kliknieciu LEWYM (bez "/")
+#   action:  close  (zamyka GUI)
+# ---------------------------------------------------------------------
+main-menu:
+  title: "&7Sklep"
+  rows: 5
+  items:
+    serca:
+      slot: 20
+      material: RED_DYE
+      name: "&cSklep za serca"
+      lore:
+        - "&8» &aKliknij &2LEWYM&a, aby przejść!"
+      command: sklepzaserca
+    waluta:
+      slot: 21
+      material: COMPASS
+      name: "&aSklep za wirtualną walutę"
+      lore:
+        - "&8» &aKliknij &2LEWYM&a, aby przejść!"
+      command: sklepzawalute
+    czas:
+      slot: 23
+      material: CLOCK
+      name: "&eSklep za przegrany czas"
+      lore:
+        - "&8» &aKliknij &2LEWYM&a, aby przejść!"
+      command: sklepzaczas
+    rynek:
+      slot: 24
+      material: PLAYER_HEAD        # domyslnie glowa Steve'a
+      # skull-owner: Nick         # <- odkomentuj, by ustawic inna glowe
+      name: "&dRynek serwerowy"
+      lore:
+        - "&8» &aKliknij &2LEWYM&a, aby przejść!"
+      command: ah                  # <- tutaj zmienisz komende rynku graczy
+    zamknij:
+      slot: 40
+      material: BARRIER
+      name: "&cZamknij"
+      action: close
+
+# ---------------------------------------------------------------------
+#  WIADOMOSCI (puste "" = wylaczona)
+#  Placeholdery: %amount% %item% %total% %pool% %size%
+# ---------------------------------------------------------------------
+messages:
+  no-permission: "&cNie masz uprawnien!"
+  no-economy: "&cEkonomia (Vault) jest niedostepna - powiadom administratora."
+  not-enough-money: "&cNie stac cie na ten przedmiot!"
+  no-space: "&cNie masz wystarczajaco miejsca w ekwipunku!"
+  buy-success: "&7Pomyslnie wykonano transakcje!"
+  sold: "&aSprzedano &f%amount%x %item% &aza &f%total%$&a."
+  nothing-to-sell: "&cBrak wystarczajacej ilosci przedmiotow do sprzedazy!"
+  pool-empty: "&cNie ma zadnej ksiegi w sklepie!"
+  pool-added: "&aDodano przedmiot do puli &f%pool% &7(razem: %size%)"
+  pool-cleared: "&aWyczyszczono pule &f%pool%&a."
+  hold-item: "&cMusisz trzymac jakis przedmiot w reku!"
+  player-not-found: "&cNie znaleziono gracza (musi byc online lub juz kiedys grac)."
+  bad-time: "&cZly format czasu. Przyklady: 4h, 2d, 1d12h30m, 90s"
+  reloaded: "&aPrzeladowano konfiguracje SklepGUI."
